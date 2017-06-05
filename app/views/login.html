@@ -1,0 +1,32 @@
+<div class="container" style="padding-top: 50px;" ng-init="cargar()">
+	<div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+            <div class="center">
+            	<a href=""><img width="100" src="images/Conciencia1.png"> Aware Systems</a>
+            </div>
+              <span class="card-title center"><br>Iniciar Sesion</span>
+              <form ng-submit="iniciarSesion()">
+              <div class="input-field">
+	              <i class="material-icons prefix">account_circle</i>
+		          <input ng-model="usuario.email" id="email" type="email" class="validate">
+          		  <label for="email" data-error="Debe escribir un mail valido" data-success="correcto">Mail</label>
+	          </div>
+	          <div class="input-field">
+	              <i class="material-icons prefix">lock</i>
+		          <input ng-model="usuario.password" id="password" type="password" class="validate">
+          		  <label for="password">Password</label>
+	          </div>
+	          <button class="btn waves-effect waves-light right" type="submit" name="action" >Iniciar Sesion
+		    	<i class="material-icons right">send</i>
+		  	  </button> 
+		  	  </form>
+		  	  <br>    
+            </div>
+          </div>
+        </div>
+	</div>
+
+</div>
+<!-- lineas 14 -->

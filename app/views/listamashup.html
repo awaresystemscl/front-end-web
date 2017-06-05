@@ -1,0 +1,58 @@
+<div ng-include="listaMashup.menuTemplate.url" ng-init="recuperar()"></div>
+<main>
+	  <h3 class="center-align">Tabla Mashup</h3>
+<div class="container">
+<div class="row">
+<div class="col s12"></div>
+
+   <table class="highlight">
+        <thead>
+          <tr>
+              <th>Descripcion</th>
+              <th>URL</th>
+              <th>Cantidad de Apis</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat ="mashup in data">
+        	<td ng-click="modalEditar(mashup.apis)">{{mashup.descripcion}}</td>
+        	<td ng-click="modalEditar(mashup.apis)">{{mashup.url}}</td>
+        	<td ng-click="modalEditar(mashup.apis)">{{contarObjeto(mashup.apis)}}</td>
+          </tr>
+        </tbody>
+      </table>      
+</div>
+</div>
+</main>
+
+<!-- Modal Editar -->
+
+<div id="modalEditar" class="modal modal-footer">
+    <div class="modal-content">
+      <h5>Lista de apis</h5>
+      <div ng-repeat="api in mashup track by $index">
+  	  <div class="row">
+      	<div class="col s12">
+      	<p><b>API Nº {{$index+1}}</b></p>
+      	</div>
+      	<div class="col s6">
+      	<p><b>Descripcion:</b> {{api.descripcion}}</p>
+      	</div>
+      	<div class="col s6">
+      	<p><b>Categoria:</b> {{api.categoria}}</p>
+      	</div>
+      	<div class="col s12">
+      	<p><b>URL:</b> {{api.url}}</p>
+      	</div>
+      </div>
+  	  <div class="divider"></div><br>
+      </div>
+      <div class="modal-footer">
+        <a class=" modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+        <a class=" modal-action modal-close waves-effect waves-green btn-flat" >Aceptar</a>
+      </div>
+    </div>
+  </div>
+
+<!--   lineas 29 -->
