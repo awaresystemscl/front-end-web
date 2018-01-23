@@ -3,6 +3,7 @@
 
   <div class="navbar-fixed">
   <nav>
+    
     <div class="nav-wrapper blue lighten-2">
       <a ng-href="" class="brand-logo center"><img src="images/logo-header.png"></a>
       <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -14,12 +15,25 @@
   </nav>
   </div>
   <ul class="side-nav fixed" id="mobile-demo">
-    <li><a ng-href="/"><i class="material-icons">cloud</i>Inicio</a></li>
-    <li><a href="/login">Iniciar Sesion</a></li>
+    <li class="container">
+      <div class="user-view container"><br>
+      <a href="main"><i class="large material-icons left circle">account_circle</i></a>
+      <br>
+      <br><a href=""><span class="black-text name">{{nombre}}</span></a>
+      <!-- <br><a href=""><span class="black-text email">jdandturk@gmail.com</span></a> -->
+    </div>
+  </li>
+    <li><a  href="" ng-click="cerrar()"><i class="material-icons left">exit_to_app</i>Cerrar Sesion</a></li>
+  <li><div class="divider"></div></li>
+    <li><a ng-href="/bienvenida"><i class="material-icons">cloud</i>Inicio</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Sub Menus</a></li>
-    <li><a href="http://www.awaresystems.cl/mashup"><i class="material-icons right">dashboard</i>Aplicacion 1</a></li>
-    <li ><a data-activates="dropdown2" class="dropdown-button2" ><i class="material-icons right">settings</i>Opciones</a></li>
+    <li><a href="main"><i class="material-icons left">insert_drive_file</i>Web Mashup</a></li>
+    <li><a href="mashups"><i class="material-icons left">developer_board</i>Mis Mashups</a></li>
+    <li><a href="cityaware"><i class="material-icons left">insert_drive_file</i>Thing Mashup</a></li>
+    <!-- <li><a href="triangulo"><i class="material-icons left">equalizer</i>Graficos</a></li> -->
+    <li><a href="http://www.awaresystems.cl/mashup"><i class="material-icons left">dashboard</i>Climatitouch</a></li>
+    <!-- <li ><a data-activates="dropdown2" class="dropdown-button2" ><i class="material-icons right">settings</i>Opciones</a></li> --> 
   </ul>
 </div>
 
@@ -30,7 +44,7 @@
 </ul> -->
 <!-- Dropdown Structure -->
 <ul id="dropdown2" class="dropdown-content">
-  <li><a href="/main">Agregar Mashup</a></li>
-  <li><a href="/listaMashup" ng-click="cargar()">Listar Mashup</a></li>
+  <li><a href="">Mi Perfil</a></li>
+  <li><a href="" ng-click="cargar()">Listar Mashup</a></li>
 </ul>
 <!-- lineas 14 -->

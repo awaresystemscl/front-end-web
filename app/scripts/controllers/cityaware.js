@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name frontEndApp.controller:MainCtrl
+ * @name frontEndApp.controller:CityawareCtrl
  * @description
- * # MainCtrl
+ * # CityawareCtrl
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-  .controller('MainCtrl', function ($scope, $route, firebase, mashup, toastr, $location) {
+  .controller('CityawareCtrl', function ($scope, $route, firebase, mashup, toastr, $location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -21,9 +21,9 @@ angular.module('frontEndApp')
     };
 
     $scope.mashup = {};
+    $scope.incremental = 0;
     $scope.mashup.apis = [];
-    $scope.opcionFactores = []
-    $scope.categorias = [
+    $scope.categoriasComponente = [
     	{"categoria":"3D"},
 		{"categoria":"Accessibility"},
 		{"categoria":"Accounting"},
@@ -503,25 +503,36 @@ angular.module('frontEndApp')
 		{"categoria":"Writing"},
 		{"categoria":"Zip Codes"}
 	];
+	$scope.categoriasThing = [
+		{"categoria":"rain"},
+		{"categoria":"humidity"},
+		{"categoria":"temperature"},
+		{"categoria":"ir receptor"},
+		{"categoria":"photoresistor"},
+		{"categoria":"ultrasonic"},
+		{"categoria":"flow meter"},
+		{"categoria":"fire detection"},
+		{"categoria":"vibration"},
+		{"categoria":"dust"},
+		{"categoria":"voice"},
+		{"categoria":"flame"}
+	];
 
     $scope.factores = [
 	    {
-	    	nombre: 'Tiempo de Respuesta',
-	    	utilizado: []
+	    	nombre: 'Tiempo de Respuesta'
 	    },
-	    // {
-	    // 	nombre: 'Disponibilidad'
-	    // },
 	    {
-	    	nombre: 'Rendimiento',
-	    	utilizado: []
+	    	nombre: 'Disponibilidad'
 	    },
-	    // {
-	    // 	nombre: 'Confiabilidad'
-	    // },
 	    {
-	    	nombre: 'Latencia',
-	    	utilizado: []
+	    	nombre: 'Rendimiento'
+	    },
+	    {
+	    	nombre: 'Confiabilidad'
+	    },
+	    {
+	    	nombre: 'Latencia'
 	    }
     ];
 
@@ -543,32 +554,22 @@ angular.module('frontEndApp')
 	    }
     ];
 
+    $scope.incrementar = function () {
+      $scope.incremental = $scope.incremental+1;
+      return $scope.incremental
+    };
+
     $scope.add = function () {
       $scope.mashup.apis.push(
 	      {
 	        nombre: "",
 	        descripcion: "",
+	        tipo: "",
 	        categoria: "",
 	        url: "",
 	        factores: []
 	      }
       );
-      $scope.opcionFactores.push([
-      	{
-	    	nombre: 'Tiempo de Respuesta',
-	    	utilizado: []
-	    },
-	    {
-	    	nombre: 'Rendimiento',
-	    	utilizado: []
-	    },
-	    {
-	    	nombre: 'Latencia',
-	    	utilizado: []
-	    }
-      	])
-      //componente factor
-      console.log($scope.opcionFactores[0][0])
     };
 
     $scope.addFactor = function (index) {
@@ -618,70 +619,18 @@ angular.module('frontEndApp')
 	$scope.test = {id:3};
 
 	$scope.enviar = function(){
-		console.log($scope.mashup)
-		console.log($scope.mashup.url)
-		var validacion = false
-		if($scope.mashup.nombre == undefined || $scope.mashup.url == undefined || $scope.mashup.descripcion	== undefined){
-			toastr.warning('Faltan datos generales del mashup','Faltan Datos')
-		}
-		else{
-			validacion = true
-		}
-
-		if($scope.mashup.apis.length <= 0 ){
-			toastr.warning('Debe agregar a lo menos un componente','Faltan Datos')
-			validacion = false
-		}else{
-			validacion = false
-			for (var i = 0; i < $scope.mashup.apis.length; i++){
-				console.log("paso")
-				if($scope.mashup.apis[i].categoria == ""){
-					toastr.warning('Falta categoria en el componente N°'+(i+1),'Faltan Datos')
-					return
-				}
-				if($scope.mashup.apis[i].descripcion == ""){
-					toastr.warning('Falta descripcion en el componente N°'+(i+1),'Faltan Datos')
-					return
-				}
-				if($scope.mashup.apis[i].nombre == ""){
-					toastr.warning('Falta nombre en el componente N°'+(i+1),'Faltan Datos')
-					return
-				}
-				if($scope.mashup.apis[i].url == ""){
-					toastr.warning('Falta url en el componente N°'+(i+1),'Faltan Datos')
-					return
-				}
-				if($scope.mashup.apis[i].factores.length <= 0 ){
-					toastr.warning('Debe agregar a lo menos un factor de calidad en el componente N°'+(i+1),'Faltan Datos')
-					return
-				}
-				for (var j = 0; j < $scope.mashup.apis[i].factores.length; j++){
-					if($scope.mashup.apis[i].factores[j].nivel == ""){
-						toastr.warning('Falta nivel de factor en el componente N° '+(i+1)+", en su Factor N° "+(j+1),'Faltan Datos')
-						return
-					}
-					if($scope.mashup.apis[i].factores[j].nombre == ""){
-						toastr.warning('Falta nombre en el componente N° '+(i+1)+", en su Factor N° "+(j+1),'Faltan Datos')
-						return
-					}
-				}
-				validacion = true
-			}
-		}
-
-		if(validacion){
-			mashup.ingresarMashup($scope.mashup) //Se hace el Insert a la base de datos
-	    	.then(function(respuesta) {
-	        	console.log(respuesta);
-	        	toastr.success('Mashup Ingresado Correctamente', 'Correcto');
-	        	$location.path('/bienvenida');
-	        }, 
-	    	function() { // optional
-	            toastr.error('Error faltan datos', 'Error');
-	            // $location.path('/');
-	        });
-		}
-   		
+		// console.log($scope.mashup)
+  //  		mashup.ingresarMashup($scope.mashup) //Se hace el Insert a la base de datos
+  //   	.then(function(respuesta) {
+  //       	console.log(respuesta);
+  //       	toastr.success('Mashup Ingresado Correctamente', 'Correcto');
+  //       	$location.path('/bienvenida');
+  //       }, 
+  //   	function() { // optional
+  //           toastr.error('Error faltan datos', 'Error');
+  //           // $location.path('/');
+  //       });
+   		console.log($scope.mashup);
 
 	}
 
@@ -692,20 +641,4 @@ angular.module('frontEndApp')
 		});
 	}
 
-	$scope.eliminarFactor = function(factor,index){
-		var contador = 0
-		console.log(factor,index)
-		for (var i = 0; i < $scope.mashup.apis[index].factores.length; i++) {
-			if($scope.mashup.apis[index].factores[i].nombre == factor){
-				contador = contador +1
-			}
-			if(contador > 1){
-				toastr.error('Ya existe el factor señalado', 'Duplicado');
-				$scope.mashup.apis[index].factores.splice(i,1)
-			}
-       	}
-	}
-
-
   });
-//lineas 56

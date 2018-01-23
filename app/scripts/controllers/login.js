@@ -8,15 +8,21 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-  .controller('LoginCtrl', function ($scope, autenticacion, toastr) {
+  .controller('LoginCtrl', function ($scope, $location, $window , autenticacion, toastr) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
+    // var forceSSL = function () {
+    //     if ($location.protocol() !== 'https') {
+    //         $window.location.href = $location.absUrl().replace('http', 'https');
+    //     }
+    // };
+    // forceSSL();
+
     $scope.iniciarSesion = function (){
-    	console.log("asd");
       //console.log(vm.loginForm);
       autenticacion.loginApi($scope.usuario);
       // toastr.success('Hello world!', 'Toastr fun!');
@@ -26,9 +32,6 @@ angular.module('frontEndApp')
     $(document).ready(function() {
       Materialize.updateTextFields();
     });
-
-
-
 
 
     $scope.cargar = function(){

@@ -5,9 +5,14 @@
             <div class="card-content">
             <div class="center">
             	<a href=""><img width="100" src="images/Conciencia1.png"> Aware Systems</a>
-            </div>
+	            </div>
               <span class="card-title center"><br>Iniciar Sesion</span>
-              <form ng-submit="iniciarSesion()">
+              <form ng-submit="registrarCuenta()">
+              <div class="input-field">
+	              <i class="material-icons prefix">people</i>
+		          <input ng-model="usuario.nombre" id="nombre" type="text" class="validate">
+          		  <label for="icon_prefix">Nombre</label>
+	          </div>
               <div class="input-field">
 	              <i class="material-icons prefix">account_circle</i>
 		          <input ng-model="usuario.email" id="email" type="email" class="validate">
@@ -15,10 +20,15 @@
 	          </div>
 	          <div class="input-field">
 	              <i class="material-icons prefix">lock</i>
-		          <input ng-model="usuario.password" id="password" type="password" class="validate">
+		          <input ng-model="usuario.password" id="password" type="password">
           		  <label for="password">Password</label>
 	          </div>
-	          <button class="btn waves-effect waves-light right" type="submit" name="action" >Iniciar Sesion
+	          <div class="input-field">
+	              <i class="material-icons prefix">lock</i>
+		          <input ng-model="usuario.passwordConfirm" id="passwordConfirm" type="password" ng-class="activar()">
+          		  <label for="passwordConfirm" data-error="Password no coincide" data-success="Correcto">Confirmar Password</label>
+	          </div>
+	          <button class="btn waves-effect waves-light right" type="submit" name="action" >Crear Cuenta
 		    	<i class="material-icons right">send</i>
 		  	  </button> 
 		  	  </form>
@@ -26,17 +36,5 @@
             </div>
           </div>
         </div>
-      <div class="col s12">
-      	<a href="/registro" class="waves-effect waves-light btn col s12 blue " 
-      	style="border-radius: 73px 73px 73px 73px;
-		-moz-border-radius: 73px 73px 73px 73px;
-		-webkit-border-radius: 73px 73px 73px 73px;
-		border: 0px solid #000000;"
-		>Registrate</a>
-      </div>
-          	
-	  	  <!-- <h6><a href="/registro">Registrate</a></h6> -->
 	</div>
-
 </div>
-<!-- lineas 14 -->

@@ -1,28 +1,28 @@
-<div ng-include="main.menuTemplate.url"></div>
+<div ng-include="cityaware.menuTemplate.url"></div>
 <div class="container" >
-  <h3>Ingreso de datos</h3>
+  <h4>Application</h3>
   <form class="col s12">
     <!-- Ingreso de Mashup -->
     <div class="row">
     <div class="input-field col s12">
         <i class="material-icons prefix">apps</i>
         <input ng-model="mashup.nombre" type="text" class="validate">
-        <label >Nombre de la aplicacion</label>
+        <label >Application Name</label>
       </div>
       <div class="input-field col s12">
         <i class="material-icons prefix">web</i>
-        <input ng-model="mashup.url" type="url" class="validate" placeholder="http://midominio.com">
-        <label >URL Mashup</label>
+        <input ng-model="mashup.url" type="text" class="validate">
+        <label >URL Thing Mashup</label>
       </div>
       <div class="input-field col s12">
         <i class="material-icons prefix">description</i>
-        <input ng-model="mashup.descripcion" type="tel"  class="validate">
-        <label >Descripcion</label>
+        <input ng-model="mashup.descripcion" type="tel" class="validate">
+        <label >Description</label>
       </div>
     </div>
 
     <div class="divider"></div><br>
-    <h5>Agrega tus Componentes</h5><br>
+    <h5>Add your Components or Things</h5><br>
     <!-- Ingreso de APIS -->
     <div class="row">
       <div ng-repeat="(indexApi,api) in mashup.apis track by indexApi">
@@ -30,46 +30,60 @@
         <div class="divider"></div><br>
         <div class="input-field col s6" >
           <i class="material-icons prefix">apps</i>
-          <input class="validate" type="text" placeholder="Nombre" ng-model="api.nombre"/>
+          <input class="validate" type="text" placeholder="Name" ng-model="api.nombre"/>
         </div>
 
         <div class="input-field col s6" >
           <i class="material-icons prefix">extension</i>
-          <input class="validate" type="text" placeholder="Descripcion" ng-model="api.descripcion"/>
-        </div>
-
-        <div class="input-field col s12" >
-          <select class="browser-default" ng-model="api.categoria" ng-options="cate.categoria as cate.categoria for (indexC,cate) in categorias track by indexC">
-            <option value="" disabled selected>Selecciona una categoria del componente</option>
-          </select>
-          <br>
+          <input class="validate" type="text" placeholder="Description" ng-model="api.descripcion"/>
         </div>
 
         <div class="input-field col s10" >
           <i class="material-icons prefix">wb_incandescent</i>
-          <input class="validate" type="url" placeholder="URL Request API" ng-model="api.url"/>
+          <input class="validate" type="text" placeholder="Direction request" ng-model="api.url"/>
         </div>
+        <div class="input-field col s10" >
+          <input class="with-gap" name="grp1{{indexApi}}" type="radio" id="r1" ng-model="api.tipo" value="true">
+          <label for="r1">Component</label>
+          <input class="with-gap" name="grp1{{indexApi}}" type="radio" id="r2" ng-model="api.tipo" value="false">
+          <label for="r2">Thing</label>
+          <br>
+        </div>
+        <div style="font-size: 15px !important; ">
+        <div ng-if="api.tipo  === 'true'" class="input-field col s12" >
+          <select class="browser-default" ng-model="api.categoria" ng-options="cate.categoria as cate.categoria for (indexC,cate) in categoriasComponente track by indexC">
+            <option value="" disabled selected>Select a Category</option>
+          </select>
+          <br>
+        </div>
+        <div ng-if="api.tipo === 'false'" class="input-field col s12" >
+          <select class="browser-default" ng-model="api.categoria" ng-options="cate.categoria as cate.categoria for (indexC,cate) in categoriasThing track by indexC">
+            <option value="" disabled selected>Select a Category</option>
+          </select>
+          <br>
+        </div>
+
 
         <div ng-repeat="(indexFactores,factor) in api.factores track by indexFactores">
         <!-- <div ng-init="agregarPosicion(indexApi,indexFactores)"></div> -->
         <div ng-init="agregarPosicion(indexApi,indexFactores)"></div>
 
-          <!-- <div ng-if="indexFactores != 0">
+          <div ng-if="indexFactores != 0">
             <div class="row">
               <div class="input-field col s6 offset-s5" >
                 <div class="center">
                   <div class="switch">
                     <label>
-                      Y
+                      AND
                       <input type="checkbox" ng-checked="isSwitchedOn" ng-model="factor.union">
                       <span class="lever"></span>
-                      O
+                      OR
                     </label>
                   </div>
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
           <br>
 
           <div class="col s12" >
@@ -77,39 +91,39 @@
               <div class="card-content">
                 <div class="center">
                 </div>
-                <span class="card-title center"><br>Factor de Calidad</span>
+                <span class="card-title center"><br>Quality Factor</span>
 
                 <div class="row">
                   
                   <div class="input-field col s12" >
-                    <select ng-click="eliminarFactor(factor.nombre,indexApi)" class="browser-default" ng-model="factor.nombre" ng-options="seleccionFac.nombre as seleccionFac.nombre for (indexF,seleccionFac) in factores track by indexF">
-                      <option value="" disabled selected>Selecciona Factor</option>
+                    <select class="browser-default" ng-model="factor.nombre" ng-options="seleccionFac.nombre as seleccionFac.nombre for (indexF,seleccionFac) in factores track by indexF">
+                      <option value="" disabled selected>Select your Factor</option>
                     </select>
                   </div>
 
                   <div class="input-field col s12" >
-                  <p class="">Se me notificará cuando el factor no cumpla con ser a lo menos:</p>
+                  <p class="">I will be notified when the factor does not comply with:</p>
                   </div>
 
-                  <!-- <div class="input-field col s6" >
+                  <div class="input-field col s6" >
                     <div class="switch">
                       <label>
-                        A lo menos
+                        a least
                         <input type="checkbox" ng-checked="isSwitchedOn" ng-model="factor.tendencia">
                         <span class="lever"></span>
-                        A lo mas
+                        a most
                       </label>
                     </div>
                   </div>
- -->
+
                   <div class="input-field col s6" >
                     <select class="browser-default" ng-model="factor.nivel" ng-options="lvl.nombre as lvl.nombre for (indexL,lvl) in nivel_de_factor track by indexL">
-                      <option value="" disabled selected>Nivel de Factor</option>
+                      <option value="" disabled selected>Factor Level</option>
                     </select>
                   </div>
 
                   <div class="input-field col s6">
-                     <a class="btn left red" id="botonIncrementar" ng-click="removeFactor(indexApi,indexFactores)"">Quitar Factor</a>
+                     <a class="btn left red" id="botonIncrementar" ng-click="removeFactor(indexApi,indexFactores)"">Delete Factor</a>
                   </div>
 
                 </div>
@@ -121,31 +135,30 @@
         </div> <!-- Fin Factor -->
         <div class="row">
           <div class="input-field col s6">
-             <a class="btn left blue" id="botonIncrementar" ng-click="addFactor(indexApi)">Agregar Factor</a>
+             <a class="btn left blue" id="botonIncrementar" ng-click="addFactor(indexApi)">Add Factor</a>
           </div>
           <div class="input-field col s6" >
-            <a class="btn right red" id="botonIncrementar" ng-click="remove(indexApi)""><i class="material-icons left">delete</i>Borrar Componente</a>
+            <a class="btn right red" id="botonIncrementar" ng-click="remove(indexApi)""><i class="material-icons left">delete</i>Delete Component</a>
           </div>
         </div>
-
+       </div>
 
         
 
       </div> <!-- Fin Componente -->
 
     <div class="input-field col s12">
-       <a class="btn right orange" id="botonIncrementar" ng-click="add()">Agregar componente</a>
+       <a class="btn-floating right" id="botonIncrementar" ng-click="add()"><i class="material-icons">add</i></a>
     </div>
 
    </form>
+   </div>
+
      <div class="row">
      <div class="divider"></div><br>
-     <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="enviar()">Enviar
+     <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="enviar()">Send
       <i class="material-icons right">send</i>
      </button>
      </div>
-   </div>
-
   </div>
 </div>
-<!-- lineas 45 -->

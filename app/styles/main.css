@@ -16,6 +16,7 @@ main{
 }
 .container {
     /*padding-top: 20px;*/
+    width:95% !important;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -46,7 +47,7 @@ main{
 }
 
 .container-narrow > hr {
-  margin: 30px 0;
+  /*margin: 30px 0;*/
 }
 
 /* Main marketing message and sign up button */

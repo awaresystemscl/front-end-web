@@ -1,0 +1,54 @@
+<div ng-include="bienvenida.menuTemplate.url"></div>
+<div class="container" style="padding-left: 50px;"  >
+	<br><br><br>
+	<div ng-if="usuario() == 'administrador'">
+		<div class="center" class="col s12 m11 offset-m1">
+			<h5>Panel de Administrador</h5><br>
+			<!-- <h6 class="red-text">Los nuevos mashups cargados posterior a esta fecha seran visibles al siguiente dia</h6><br> -->
+		</div>
+		  <ul class="collapsible" data-collapsible="accordion">
+		    <li>
+		      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Monitoreo</div>
+		      <div class="collapsible-body">
+		      	<span>El ultimo monitoreo fue realizado el dia:
+				<br><b>{{hoy}} a las 00:00 (Hora Servidor)</b>
+		      	</span>
+		      </div>
+		    </li>
+		    <li>
+		      <div class="collapsible-header"><i class="material-icons">access_time</i>Hora del Servidor</div>
+		      <div class="collapsible-body"><span>
+
+		      	<b>Dia: {{diaServidor}}</b>
+		      	<br><b>Hora: {{fecha}}</b>
+		      	<br>
+		      </span></div>
+		    </li>
+		    <li>
+		      <div class="collapsible-header"><i class="material-icons">whatshot</i>Umbral de Satisfaccion de Mashups</div>
+		      <div class="collapsible-body"><span>
+		      	<div class="row">
+		      		<div class="col s12">
+	  					<b>Umbral Actual: {{umbral}}%</b>
+	  				</div>
+		      		<div class="col s12 ">
+						Editar Umbral:
+						<div class="input-field inline">
+			            <input id="email" type="number" class="validate" ng-model="cambioUmbral" >
+			          </div>
+			        </div>
+			        <div class="col s12 ">
+			        	<a class="waves-effect waves-light btn blue darken-1">Cambiar Umbral</a>
+			        </div>
+	        	</div>
+		      </span></div>		
+		    </li>
+		  </ul>
+	  </div>
+	  <div ng-if="usuario() == 'usuario'">
+		<div class="center" class="col s12 m11 offset-m1">
+			<h5>Bienvenido</h5><br>
+			<!-- <h6 class="red-text">Los nuevos mashups cargados posterior a esta fecha seran visibles al siguiente dia</h6><br> -->
+		</div>
+	  </div>
+</div>

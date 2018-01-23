@@ -12,7 +12,7 @@ angular.module('frontEndApp')
     // Service logic
     // ...
 
-    var urlBackEnd = 'http://awaresystems.cl:8750';
+    var urlBackEnd = 'https://awaresystems.cl/api';
 
     // Public API here
     return {

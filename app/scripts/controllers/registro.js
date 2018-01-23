@@ -2,22 +2,22 @@
 
 /**
  * @ngdoc function
- * @name frontEndApp.controller:MenuCtrl
+ * @name frontEndApp.controller:RegistroCtrl
  * @description
- * # MenuCtrl
+ * # RegistroCtrl
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-  .controller('MenuCtrl', function ($scope, autenticacion, controlDeSesion) {
+  .controller('RegistroCtrl', function ($scope, registro, toastr,  $location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    $scope.cerrar = function(){
-      autenticacion.logout();
-    }
+    $scope.usuario = {}
+    $scope.usuario.password = ""
+    $scope.usuario.passwordConfirm = ""
 
     $scope.cargar = function(){
       /*Preloader*/
@@ -49,20 +49,37 @@ angular.module('frontEndApp')
             }    
           };
 
-      $scope.nombre = controlDeSesion.get("nombre")
-
     };
 
-  
+    $scope.activar = function(){
+      if($scope.usuario.password == ""){
+        return ''
+      }
+      else if($scope.usuario.password == $scope.usuario.passwordConfirm){
+        return 'valid'
+      }
+      else{
+        return 'invalid'
+      }
+    }
 
-    $( document ).ready(function(){
-        $('.button-collapse').sideNav();
-        $('.button-collapse').sideNav('hide');
-    });
+    $scope.registrarCuenta = function(){
+      if($scope.usuario.password == $scope.usuario.passwordConfirm){
+        registro.registrarCuenta($scope.usuario)
+        .then(function(respuesta) {
+            console.log(respuesta);
+            toastr.success('Cuenta registrada Correctamente', 'Correcto');
+            $location.path('/');
+          }, 
+        function(respuesta) { // optional
+              toastr.error(respuesta.data.error, 'Error');
+          });
+        console.log($scope.mashup);
+      }
+      else{
+        toastr.warning('Password incorrecta', 'Error');
+      }
+    }
 
 
-     $('.dropdown-button').dropdown({ hover: true, constrainWidth: false, belowOrigin: true, alignment: 'left' });
-     $('.dropdown-button2').dropdown({ hover: true, constrainWidth: true, belowOrigin: true, alignment: 'right' });
-    
   });
-//lineas 16

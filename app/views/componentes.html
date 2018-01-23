@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col s0 m2">
+		<div ng-include="componentes.menuTemplate.url" ng-init="inicio()"></div>
+	</div>
+	<br><br><br>
+	<div class="col s12 m11 offset-m1">
+		<div class="container" >
+			<table class="highlight">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Satisfaccion</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat ="componente in misComponentes">
+						<td>{{componente.nombre}}</td>
+						<td>{{componente.avg}}%</td>
+						<td><a ng-click="detalles(componente.componente_id)" class="waves-effect waves-light btn-floating modal-trigger" ><i class="material-icons">description</i></a></td>
+						<td><a ng-click="graficos(componente.componente_id)" class="btn-floating waves-effect waves-light btn"><i class="material-icons">equalizer</i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+ <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Restricciones del Componente</h4>
+      <div ng-repeat ="restriccion in restricciones">
+      	<p>Factor de calidad <b>{{restriccion.nombre}}</b>, debe ser a lo menos <b>{{restriccion.nivel}}</b></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a ng-click="cerrarModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+    </div>
+  </div>

@@ -1,0 +1,62 @@
+
+<div class="row">
+        <div class="col s0 m2">
+          <div ng-include="triangulo.menuTemplate.url" ng-init="inicio()"></div>
+        </div>
+<div class="col s12 m10">
+  <br><br><br>
+  <!-- <dir style="padding-left: 10%;"> -->
+<!--   <div ng-repeat="factor in factores track by $index ">
+    <div google-chart chart="chart[$index]" style="{{chart.cssStyle}}"/ agc-on-select="seriesSelected(selectedItem, $index)">
+  </div>
+  </div> -->
+  <!-- </dir> -->
+<!-- <canvas width="400" height="400" id="base" class="chart-base" chart-type="type"
+  chart-data="data" chart-labels="labels" chart-legend="true" >
+</canvas>  -->
+<div class="container">
+
+
+	<H1>Ultimos 50 registros </H1>
+
+    <div class="input-field col s6">
+          <input id="search" type="search" required ng-model="query[queryBy]">
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+    </div>
+    </div>
+    <!-- {{ApisQuality}} -->
+    <div class="col s12 m10 offset-m1 ">
+    <table class="highlight">
+        <thead>
+          <tr>
+              <th><a ng-click="cambiar('nombre')" class="waves-effect waves-teal btn-flat">Nombre</a></th>
+              <th><a ng-click="cambiar('rendimiento')" class="waves-effect waves-teal btn-flat">Rendimiento</a></th>
+              <th><a ng-click="cambiar('latencia')" class="waves-effect waves-teal btn-flat">Latencia</a></th>
+              <th><a ng-click="cambiar('categoria')" class="waves-effect waves-teal btn-flat">Categoria</a></th>
+              <th><a ng-click="cambiar('tiempo_de_respuesta')" class="waves-effect waves-teal btn-flat">Tiempo de respuesta</a></th>
+              <th><a ng-click="cambiar('disponibilidad')" class="waves-effect waves-teal btn-flat">Disponibilidad</a></th>
+              <th><a ng-click="cambiar('confiabilidad')" class="waves-effect waves-teal btn-flat">Confiabilidad</a></th>
+              <th><a ng-click="cambiar('fecha')" class="waves-effect waves-teal btn-flat">Fecha</a></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-if="verificar(api)" id="select" ng-repeat ="api in ApisQuality | filter:query | orderBy: ordenarPor">
+            <div ng-if="false" >
+              <td>{{api.nombre}}</td>
+              <td>{{api.rendimiento }}[ms]</td>
+              <td>{{api.latencia }}[ms]</td>
+              <td>{{api.categoria}}</td>
+              <td>{{api.tiempo_de_respuesta }}[ms]</td>
+              <td>{{api.disponibilidad }}%</td>
+              <td>{{api.confiabilidad }}%</td>
+              <td>{{api.fecha | date:'yyyy-MM-dd'}}</td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      
+</div>
+</div>

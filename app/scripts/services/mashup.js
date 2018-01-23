@@ -15,7 +15,7 @@ angular.module('frontEndApp')
       verApi: function(test){
         return $http({
             method: 'GET',
-            url: urlBackEnd+'/api',
+            url: '/api',
             params: test
             });
       },
@@ -24,6 +24,28 @@ angular.module('frontEndApp')
             method: 'POST',
             url: urlBackEnd+'/mashup',
             data: mashup
+            });
+      },
+      verMisMashups: function(){
+        return $http({
+            method: 'GET',
+            // url: urlBackEnd+'/mismashups',
+            url: urlBackEnd+'/misMashups',
+            });
+      },
+      verMisComponentes: function(mashup_id){
+        return $http({
+            method: 'POST',
+            // url: urlBackEnd+'/mismashups',
+            url: urlBackEnd+'/misComponentes',
+            data: mashup_id
+            });
+      },
+      verRestriccionesDeComponente: function(componente_id){
+        return $http({
+            method: 'POST',
+            url: urlBackEnd+'/verRestriccionesDeComponente',
+            data: {componente_id:componente_id}
             });
       }
   	};

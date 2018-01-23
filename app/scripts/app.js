@@ -18,10 +18,12 @@ angular
     'ngRoute',
     'ngSanitize',
     'satellizer',
-    'toastr'
+    'toastr',
+    'googlechart',
+    'plotly'
   ])
   .config(function ($routeProvider,$locationProvider,$authProvider) {
-    $authProvider.loginUrl = 'http://awaresystems.cl/api/autenticacion';
+    $authProvider.loginUrl = 'https://awaresystems.cl/api/autenticacion';
     $routeProvider
       .when('/main', {
         templateUrl: 'views/main.html',
@@ -48,25 +50,82 @@ angular
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
+      .when('/registro', {
+        templateUrl: 'views/registro.html',
+        controller: 'RegistroCtrl',
+        controllerAs: 'registro'
+      })
+      .when('/registro', {
+        templateUrl: 'views/registro.html',
+        controller: 'RegistroCtrl',
+        controllerAs: 'registro'
+      })
+      .when('/bienvenida', {
+        templateUrl: 'views/bienvenida.html',
+        controller: 'BienvenidaCtrl',
+        controllerAs: 'bienvenida'
+      })
+      .when('/triangulo', {
+        templateUrl: 'views/triangulo.html',
+        controller: 'TrianguloCtrl',
+        controllerAs: 'triangulo'
+      })
+      .when('/cityaware', {
+        templateUrl: 'views/cityaware.html',
+        controller: 'CityawareCtrl',
+        controllerAs: 'cityaware'
+      })
+      .when('/mashups', {
+        templateUrl: 'views/mashups.html',
+        controller: 'MashupsCtrl',
+        controllerAs: 'mashups'
+      })
+      .when('/omponentes', {
+        templateUrl: 'views/omponentes.html',
+        controller: 'OmponentesCtrl',
+        controllerAs: 'omponentes'
+      })
+      .when('/componentes', {
+        templateUrl: 'views/componentes.html',
+        controller: 'ComponentesCtrl',
+        controllerAs: 'componentes'
+      })
+      .when('/graficoComponente', {
+        templateUrl: 'views/graficocomponente.html',
+        controller: 'GraficocomponenteCtrl',
+        controllerAs: 'graficoComponente'
+      })
       .otherwise({
         redirectTo: '/'
       });
       $locationProvider.html5Mode(true);
   })
-.run(function($rootScope, $location, autenticacion, toastr){
+.run(function($rootScope, $location, autenticacion, toastr,$timeout){
     var rutasPrivadas = 
       [
         '/listaMashup',
         '/main',
         '/about',
-        '/menu'
+        '/menu',
+        '/triangulo',
+        '/bienvenida',
+        '/cityaware',
+        '/mashups',
+        '/componentes',
+        '/componentes',
+        '/graficoComponente',
       ];
     $rootScope.$on('$routeChangeStart', function(){
       if(($.inArray($location.path(), rutasPrivadas) !== -1) && !autenticacion.isLoggedIn()){
-        toastr.error('Debes iniciar sesion', 'Mensaje de Error');
-        $location.path('/');
+        toastr.error('Debes iniciar sesion', 'Login');
+        $location.path('/'); 
       }
-
+      $timeout(function() { 
+          if(($.inArray($location.path(), rutasPrivadas) !== -1) && !autenticacion.isLoggedIn()){
+            toastr.error('Debes iniciar sesion', 'Login');
+            $location.path('/');
+          }
+        }, 1000);  
     });
   });
 //lineas 9

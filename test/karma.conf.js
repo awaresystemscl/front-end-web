@@ -33,6 +33,9 @@ module.exports = function(config) {
       'bower_components/materialize/bin/materialize.js',
       'bower_components/satellizer/dist/satellizer.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
+      'bower_components/angular-google-chart/ng-google-chart.js',
+      'bower_components/plotly.js/dist/plotly.js',
+      'bower_components/angular-plotly/src/angular-plotly.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
